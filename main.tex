@@ -1,0 +1,167 @@
+%%
+% CS 4510 Homework LaTex Template
+% (C) Copyright Junghyun Kim(conankun@gatech.edu)
+%%
+%Preset
+\documentclass[10pt, legalpaper]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgf}
+\usetikzlibrary{arrows,automata}
+\usepackage{enumerate}
+
+% Configuración del Encabezado
+\newcommand{\class}{CS 4510: Automata and Complexity}
+\newcommand{\term}{Fall 2017}
+\newcommand{\examnum}{Homework 1}
+\newcommand{\examdate}{Due: Sep. 11th. 2017}
+\pagestyle{head}
+\runningheader{\class}{\examnum\ - Page \thepage\ of \numpages}{\examdate}
+\runningheadrule
+
+% Configuración de la tabla de calificación
+\pointpoints{punto}{Points}
+\hpword{Points:}
+\vpword{Points}
+\vtword{Total:}
+\htword{Total}
+\vsword{Score}
+\hsword{Score:}
+\vqword{Problem}
+\hqword{Question:}
+
+\begin{document}
+% Definición del Encabezado
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} &  & \\
+\textbf{\term} &&\\
+\textbf{\examnum} & \textbf{Name:} & \makebox[2.5in]{\hrulefill}\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+
+% Bloque de instrucciones
+\noindent
+This assignment contains \numpages\; pages (including this cover page) and \numquestions\; questions. Print  your name at the top of this page, and put your initials on the top of every other page, in case the pages become separated. \\\\
+Please show your work on each problem. You might get partial credit for your work. Also, \textbf{do not write in the table below}.
+
+% Tabla de calificaciones
+\begin{center}
+\textbf{Table for Instructor use only}. \\
+\addpoints
+% Puede presentar la tabla de calificación en orientación vertical [v] u horizontal [h]
+\gradetable[h][questions]
+\end{center}
+
+\noindent
+\rule[2ex]{\textwidth}{2pt}
+
+% Questions.
+\begin{questions}
+\newpage
+\addpoints
+\question[25] Give state diagrams of DFAs recognizing the follwing languages. In all parts, the alphabet is $\{0, 1\}$.
+\begin{enumerate}[(a)]
+\item $\{w| w \textrm{ contains at least three 1s}\}$
+\item $\{w| w \textrm{ starts with 0 and has odd length, or starts with 1 and has even length}\}$
+\item $\{w| w \textrm{ doesn't contain the substring 110}\}$
+\item $\{w| w \textrm{ is any string except 11 and 111}\}$
+\item $\{w| w \textrm{ contains an even number of 0s, or contains exactly two 1s}\}$
+\end{enumerate}
+
+\subsection*{Answers}
+
+\begin{enumerate}[(a)]
+    \setlength\itemsep{5em}
+
+    \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
+        \node[initial,state]   (1)              {$1$};
+        \node[state]           (2) [right of=1] {$2$};
+        \node[state]           (3) [right of=2] {$3$};
+        \node[accepting,state] (4) [right of=3] {$4$};
+
+        \path[->] (1) edge [loop above] node (top) {0}   (1)
+                      edge              node       {1}   (2)
+                  (2) edge [loop above] node       {0}   (2)
+                      edge              node       {1}   (3)
+                  (3) edge [loop above] node       {0}   (3)
+                      edge              node       {1}   (4)
+                  (4) edge [loop above] node       {0,1} (4);
+    \end{tikzpicture}
+           
+    \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
+        \node[initial,state]   (1)                    {$1$};
+        \node[accepting,state] (2) [above right of=1] {$2$};
+        \node[state]           (3) [right of=2]       {$3$};
+        \node[state]           (4) [below right of=1] {$4$};
+        \node[accepting,state] (5) [right of=4]       {$5$};
+
+        \path[->] (1) edge             node       {0}   (2)
+                      edge             node       {1}   (4)
+                  (2) edge [bend left] node (top) {0,1} (3)
+                  (3) edge [bend left] node       {0,1} (2)
+                  (4) edge [bend left] node       {0,1} (5)
+                  (5) edge [bend left] node       {0,1} (4);
+    \end{tikzpicture}
+    
+        \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
+        \node[accepting,state] (1)                    {$1$};
+        \node[accepting,state] (2) [above right of=1] {$2$};
+        \node[accepting,state] (3) [right of=2]       {$3$};
+        \node[state]           (4) [below right of=1] {$4$};
+        \node[accepting,state] (5) [right of=4]       {$5$};
+
+        \path[->] (1) edge             node       {0}   (2)
+                      edge             node       {1}   (4)
+                  (2) edge [bend left] node (top) {0,1} (3)
+                  (3) edge [bend left] node       {0,1} (2)
+                  (4) edge [bend left] node       {0,1} (5)
+                  (5) edge [bend left] node       {0,1} (4);
+    \end{tikzpicture}
+\end{enumerate}
+
+\newpage
+\addpoints
+\question[15] Give state diagram of NFAs with the specified number of states recognizing each of the following languages. In all parts, the alphabet is $\{0,1\}$
+\begin{enumerate}[(a)]
+\item {$\{w| w \textrm{ contains the substring 0101 (i.e., } w = x0101y \textrm{ for some } x \textrm{ and } y \textrm{)}\}$}
+\item $\{w| w \textrm{ contains an even number of 0s, or contains exactly two 1s}\}$
+\item {The language $0^{*}1^{*}0^{+}$ with three states}
+\end{enumerate}
+
+\newpage
+\addpoints
+\question[20] Please complete following proofs.
+\begin{enumerate}[(a)]
+\item {Show that if $M$ is a DFA that recognizes language $B$, swapping the accept and nonaccept states in $M$ yields a new DFA recognizing the complement of $B$. Conclude that the class of regular languages is closed under complement.}
+\item {Show by giving an example that if $M$ is an NFA that recognizes language $C$, swapping the accept and nonaccept states in $M$ doesn't necessarily yield a new NFA that recognizes the complement of $C$. Is the class of languages recognized by NFAs closed under complement? Explain your answer.}
+\end{enumerate}
+\newpage
+
+\addpoints
+\question[25] Complete the five levels of Manufactoria (http://pleasingfungus.com/Manufactoria/) circled in red in the image below.
+\begin{enumerate}
+\item For each of your solutions, click the "Save" button (floppy disk icon), and copy the URL it gives you. (Note: Save is not available until after you complete level 1.)
+
+\item Submit the URLs to your solutions on T-square.
+
+\item Answer what does this game have to do with the material we study?\end{enumerate}
+For clarity, the levels you will be submitting are:
+\begin{itemize}
+\item \textbf{Robotoast}! ACCEPT: Move robots from the entrance (top) to the exit (bottom)!
+\item \textbf{Robocoffee}! If a robot's string starts with blue, accept. Otherwise, reject!
+\item \textbf{Robolamp}! ACCEPT: if there are three or more blues!
+\item \textbf{Robofish}! ACCEPT: if a robot contains NO red!
+\item \textbf{Robobugs}! ACCEPT: if the tape has only alternating colors!
+\end{itemize}
+\includegraphics[scale=0.7]{manufactoria.png}
+
+
+\end{questions}
+
+\end{document}
