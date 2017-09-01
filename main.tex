@@ -220,6 +220,42 @@ Please show your work on each problem. You might get partial credit for your wor
 \item {The language $0^{*}1^{*}0^{+}$ with three states}
 \end{enumerate}
 
+\subsection*{Answers}
+
+\begin{enumerate}[(a)]
+    \setlength\itemsep{5em}
+    
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,state]   (1)                    {$1$};
+        \node[state]           (2) [above right of=1] {$2$};
+        \node[state]           (3) [right of=2]       {$3$};
+        \node[accepting,state] (4) [right of=3]       {$4$};
+        \node[state]           (5) [right of=4]       {$5$};
+        \node[accepting,state] (6) [below right of=1] {$6$};
+        \node[state]           (7) [right of=6]       {$7$};
+
+        \path (1) edge              node       {$\epsilon$} (2)
+                  edge              node       {$\epsilon$} (6)
+              (2) edge [loop above] node       {0}          (2)
+                  edge              node       {1}          (3)
+              (3) edge [loop above] node       {0}          (3)
+                  edge              node       {1}          (4)
+              (4) edge [loop above] node       {0}          (4)
+                  edge              node       {1}          (5)
+              (6) edge [loop below] node       {1}          (6)
+                  edge [bend left]  node       {0}          (7)
+              (7) edge [loop below] node       {1}          (7)
+                  edge [bend left]  node       {0}          (6);
+              
+    \end{tikzpicture}        
+\end{enumerate}
+
 \newpage
 \addpoints
 \question[20] Please complete following proofs.
