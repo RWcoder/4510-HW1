@@ -232,6 +232,30 @@ Please show your work on each problem. You might get partial credit for your wor
             semithick,
             baseline=(top.base)]
 
+        \node[initial,state]   (1)              {$1$};
+        \node[state]           (2) [right of=1] {$2$};
+        \node[state]           (3) [right of=2] {$3$};
+        \node[state]           (4) [right of=3] {$4$};
+        \node[accepting,state] (5) [right of=4] {$5$};
+
+        \path (1) edge [loop above]         node       {1} (1)
+                  edge                      node       {0} (2)
+              (2) edge [loop below]         node       {0} (2)
+                  edge                      node       {1} (3)
+              (3) edge [bend left=60]       node       {1} (1)
+                  edge                      node       {0} (4)
+              (4) edge [swap,bend right=50] node (top) {0} (2)
+                  edge                      node       {1} (5);
+
+    \end{tikzpicture}
+
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
         \node[initial,state]   (1)                    {$1$};
         \node[state]           (2) [above right of=1] {$2$};
         \node[state]           (3) [right of=2]       {$3$};
@@ -253,7 +277,27 @@ Please show your work on each problem. You might get partial credit for your wor
               (7) edge [loop below] node       {1}          (7)
                   edge [bend left]  node       {0}          (6);
               
-    \end{tikzpicture}        
+    \end{tikzpicture}
+    
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,state]   (1)                    {$1$};
+        \node[accepting,state] (3) [below right of=1] {$3$};
+        \node[state]           (2) [above right of=3] {$2$};
+
+        \path (1) edge [loop above] node {0}          (top) (1)
+                  edge              node {$\epsilon$}       (2)
+                  edge [swap]       node {0}                (3)
+              (2) edge [loop above] node {1}                (2)
+                  edge              node {0}                (3)
+              (3) edge [loop below] node {0}                (3);
+              
+    \end{tikzpicture}    
 \end{enumerate}
 
 \newpage
