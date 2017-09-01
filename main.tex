@@ -79,49 +79,135 @@ Please show your work on each problem. You might get partial credit for your wor
 \begin{enumerate}[(a)]
     \setlength\itemsep{5em}
 
-    \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=3cm,
+            semithick,
+            baseline=(top.base)]
+            
         \node[initial,state]   (1)              {$1$};
         \node[state]           (2) [right of=1] {$2$};
         \node[state]           (3) [right of=2] {$3$};
         \node[accepting,state] (4) [right of=3] {$4$};
 
-        \path[->] (1) edge [loop above] node (top) {0}   (1)
-                      edge              node       {1}   (2)
-                  (2) edge [loop above] node       {0}   (2)
-                      edge              node       {1}   (3)
-                  (3) edge [loop above] node       {0}   (3)
-                      edge              node       {1}   (4)
-                  (4) edge [loop above] node       {0,1} (4);
+        \path (1) edge [loop above] node (top) {0}   (1)
+                  edge              node       {1}   (2)
+              (2) edge [loop above] node       {0}   (2)
+                  edge              node       {1}   (3)
+              (3) edge [loop above] node       {0}   (3)
+                  edge              node       {1}   (4)
+              (4) edge [loop above] node       {0,1} (4);
+                  
     \end{tikzpicture}
            
-    \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
         \node[initial,state]   (1)                    {$1$};
         \node[accepting,state] (2) [above right of=1] {$2$};
         \node[state]           (3) [right of=2]       {$3$};
         \node[state]           (4) [below right of=1] {$4$};
         \node[accepting,state] (5) [right of=4]       {$5$};
 
-        \path[->] (1) edge             node       {0}   (2)
-                      edge             node       {1}   (4)
-                  (2) edge [bend left] node (top) {0,1} (3)
-                  (3) edge [bend left] node       {0,1} (2)
-                  (4) edge [bend left] node       {0,1} (5)
-                  (5) edge [bend left] node       {0,1} (4);
+        \path (1) edge             node       {0}   (2)
+                  edge             node       {1}   (4)
+              (2) edge [bend left] node (top) {0,1} (3)
+              (3) edge [bend left] node       {0,1} (2)
+              (4) edge [bend left] node       {0,1} (5)
+              (5) edge [bend left] node       {0,1} (4);
+
     \end{tikzpicture}
     
-        \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,baseline=(top.base)]
-        \node[accepting,state] (1)              {$1$};
-        \node[accepting,state] (2) [right of=1] {$2$};
-        \node[accepting,state] (3) [right of=2] {$3$};
-        \node[state]           (4) [right of=3] {$4$};
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
 
-        \path[->] (1) edge [loop above]   node (top) {0}   (1)
-                      edge                node       {1}   (2)
-                  (2) edge [bend left]    node       {0}   (1)
-                      edge                node       {1}   (3)
-                  (3) edge [bend left=70] node       {1}   (1)
-                      edge                node       {0}   (4)
-                  (4) edge [loop above]   node       {0,1} (4);
+        \node[initial,accepting,state] (1)              {$1$};
+        \node[accepting,state]         (2) [right of=1] {$2$};
+        \node[accepting,state]         (3) [right of=2] {$3$};
+        \node[state]                   (4) [right of=3] {$4$};
+
+        \path (1) edge [loop above] node (top) {0}   (1)
+                  edge              node       {1}   (2)
+              (2) edge [bend left]  node       {0}   (1)
+                  edge              node       {1}   (3)
+              (3) edge [loop above] node       {1}   (3)
+                  edge              node       {0}   (4)
+              (4) edge [loop above] node       {0,1} (4);
+
+    \end{tikzpicture}
+    
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,state]   (1)              {$1$};
+        \node[state]           (2) [right of=1] {$2$};
+        \node[state]           (3) [right of=2] {$3$};
+        \node[state]           (4) [right of=3] {$4$};
+        \node[accepting,state] (5) [right of=4] {$5$};
+
+        \path (1) edge [bend right=50] node       {0}   (5)
+                  edge                 node       {1}   (2)
+              (2) edge [bend right=50] node       {0}   (5)
+                  edge                 node       {1}   (3)
+              (3) edge [bend right=50] node       {0}   (5)
+                  edge                 node       {1}   (4)
+              (4) edge                 node       {0,1} (5)
+              (5) edge [loop above]    node (top) {0,1} (5);
+
+    \end{tikzpicture}
+    
+    \item \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,accepting,state] (1)               {$1$};
+        \node[accepting,state]         (2)  [right of=1] {$2$};
+        \node[accepting,state]         (3)  [right of=2] {$3$};
+        \node[accepting,state]         (4)  [right of=3] {$4$};
+        \node[state]                   (5)  [right of=4] {$5$};
+        \node[state]                   (6)  [below of=1] {$6$};
+        \node[state]                   (7)  [right of=6] {$7$};
+        \node[accepting,state]         (8)  [right of=7] {$8$};        
+        \node[state]                   (9)  [right of=8] {$9$};
+        \node[accepting,state]         (10) [right of=9] {$10$};
+        
+        \path (1) edge [bend left]  node       {0} (6)
+                  edge              node       {1} (2)
+              (2) edge [bend left]  node       {0} (7)
+                  edge              node       {1} (3)
+              (3) edge [bend left]  node       {0} (8)
+                  edge              node       {1} (4)
+              (4) edge [bend left]  node       {0} (5)
+                  edge [loop above] node (top) {1} (4)
+              (5) edge [bend left]  node       {0} (4)
+                  edge [loop above] node       {1} (5)
+              (6) edge [bend left]  node       {0} (1)
+                  edge              node       {1} (7)
+              (7) edge [bend left]  node       {0} (2)
+                  edge              node       {1} (8)
+              (8) edge [bend left]  node       {0} (3)
+                  edge              node       {1} (9)
+              (9) edge [bend left]  node       {0} (10)
+                  edge [loop below] node       {1} (9)
+             (10) edge [bend left]  node       {0} (9)
+                  edge [loop below] node       {1} (10);
+
     \end{tikzpicture}
 \end{enumerate}
 
