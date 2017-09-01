@@ -308,8 +308,60 @@ Please show your work on each problem. You might get partial credit for your wor
 \item {Show that if $M$ is a DFA that recognizes language $B$, swapping the accept and nonaccept states in $M$ yields a new DFA recognizing the complement of $B$. Conclude that the class of regular languages is closed under complement.}
 \item {Show by giving an example that if $M$ is an NFA that recognizes language $C$, swapping the accept and nonaccept states in $M$ doesn't necessarily yield a new NFA that recognizes the complement of $C$. Is the class of languages recognized by NFAs closed under complement? Explain your answer.}
 \end{enumerate}
-\newpage
 
+\subsection*{Answers}
+
+\begin{enumerate}[(a)]
+    \item
+
+    \item Consider the following NFA \(N_{1}\) with \(L(N_{1})=\{w| w \textrm{ contains an even number of 0s}\}\): 
+    \begin{center}       
+    \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,state]   (1)              {$1$};
+        \node[accepting,state] (2) [right of=1] {$2$};
+        \node[state]           (3) [right of=2] {$3$};
+
+        \path (1) edge              node       {$\epsilon$} (2)
+              (2) edge [loop below] node       {1}          (2)
+                  edge [bend left]  node (top) {0}          (3)
+              (3) edge [loop below] node       {1}          (3)
+                  edge [bend left]  node       {0}          (2);
+              
+    \end{tikzpicture}
+    \end{center}
+    
+    Now create \(N_{2}\) by swapping the accept and reject states of \(N_{1}\):
+    \begin{center}       
+    \begin{tikzpicture}[->,
+            >=latex,
+            auto,
+            node distance=2.5cm,
+            semithick,
+            baseline=(top.base)]
+
+        \node[initial,accepting,state] (1)              {$1$};
+        \node[state]                   (2) [right of=1] {$2$};
+        \node[accepting,state]         (3) [right of=2] {$3$};
+
+        \path (1) edge              node       {$\epsilon$} (2)
+              (2) edge [loop below] node       {1}          (2)
+                  edge [bend left]  node (top) {0}          (3)
+              (3) edge [loop below] node       {1}          (3)
+                  edge [bend left]  node       {0}          (2);
+              
+    \end{tikzpicture}
+    \end{center}
+    
+    Although this new NFA accepts strings with an odd number of 0s, it also accepts \(\epsilon\), and \(\epsilon \in L(N_{1})\), therefore \(L(N_{2}) \neq L(N_{1})'\). This does not mean that the class of languages recognized by NFAs is not closed under complement. The class of languages recognized by NFAs is exactly the class of languages recognized by DFAs, and it was just shown that this class is closed under complement.
+\end{enumerate}
+
+\newpage
 \addpoints
 \question[25] Complete the five levels of Manufactoria (http://pleasingfungus.com/Manufactoria/) circled in red in the image below.
 \begin{enumerate}
