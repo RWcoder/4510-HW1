@@ -260,8 +260,8 @@ Please show your work on each problem. You might get partial credit for your wor
         \node[state]           (7) [right of=6]       {$7$};
 
         \path (1) edge              node       {$\epsilon$} (2)
-                  edge              node       {$\epsilon$} (6)
-              (2) edge [loop above] node       {0}          (2)
+                  edge [swap]       node       {$\epsilon$} (6)
+              (2) edge [loop above] node (top) {0}          (2)
                   edge              node       {1}          (3)
               (3) edge [loop above] node       {0}          (3)
                   edge              node       {1}          (4)
@@ -285,11 +285,11 @@ Please show your work on each problem. You might get partial credit for your wor
         \node[state]           (2) [right of=1] {$2$};
         \node[accepting,state] (3) [right of=2] {$3$};
 
-        \path (1) edge [loop above] node {0}          (top) (1)
-                  edge              node {$\epsilon$}       (2)
-              (2) edge [loop above] node {1}                (2)
-                  edge              node {0}                (3)
-              (3) edge [loop above] node {0}                (3);
+        \path (1) edge [loop above] node (top) {0}          (1)
+                  edge              node       {$\epsilon$} (2)
+              (2) edge [loop above] node       {1}          (2)
+                  edge              node       {0}          (3)
+              (3) edge [loop above] node       {0}          (3);
               
     \end{tikzpicture}    
 \end{enumerate}
@@ -305,7 +305,7 @@ Please show your work on each problem. You might get partial credit for your wor
 \subsection*{Answers}
 
 \begin{enumerate}[(a)]
-    \item
+    \item Let \(M'\) be the DFA with swapped accept/nonaccept states and let \(B'\) be the language recognized by \(M'\). Consider an arbitrary string \(w\). If \(w \in B\), then it must be true that \(w \notin B'\), since whichever accept state of \(M\) it ends on must be a nonaccept state of \(M'\). If \(w \notin B\), then it must have ended on a nonaccept state of \(M\), which would be an accept state of \(M'\). In this case \(w \in B'\). Therefore \(B'=\{w|w \notin B\}\). This is the definition of the complement of a set, so \(B'=B^{\complement}\). \(B\) is a regular language because it is recognized by a DFA, and since \(B^{\complement}\) is recognized by a DFA it is also a regular language. This means the complement of a regular language is also a regular language, therefore the class of regular languages is closed under complement.
 
     \item Consider the following NFA \(N_{1}\) with \(L(N_{1})=\{w| w \textrm{ contains an even number of 0s}\}\): 
     \begin{center}       
@@ -351,7 +351,7 @@ Please show your work on each problem. You might get partial credit for your wor
     \end{tikzpicture}
     \end{center}
     
-    Although this new NFA accepts strings with an odd number of 0s, it also accepts \(\epsilon\), and \(\epsilon \in L(N_{1})\), therefore \(L(N_{2}) \neq L(N_{1})'\). This does not mean that the class of languages recognized by NFAs is not closed under complement. The class of languages recognized by NFAs is exactly the class of languages recognized by DFAs, and it was just shown that this class is closed under complement.
+    Although this new NFA accepts strings with an odd number of 0s, it also accepts \(\epsilon\), and \(\epsilon \in L(N_{1})\), therefore \(L(N_{2}) \neq L(N_{1})^{\complement}\). This does not mean that the class of languages recognized by NFAs is not closed under complement. The class of languages recognized by NFAs is exactly the class of languages recognized by DFAs, and it was just shown that this class is closed under complement.
 \end{enumerate}
 
 \newpage
