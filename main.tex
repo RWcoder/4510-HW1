@@ -252,22 +252,20 @@ Please show your work on each problem. You might get partial credit for your wor
         \node[state]           (2) [above right of=1] {$2$};
         \node[state]           (3) [right of=2]       {$3$};
         \node[accepting,state] (4) [right of=3]       {$4$};
-        \node[state]           (5) [right of=4]       {$5$};
-        \node[accepting,state] (6) [below right of=1] {$6$};
-        \node[state]           (7) [right of=6]       {$7$};
+        \node[accepting,state] (5) [below right of=1] {$5$};
+        \node[state]           (6) [right of=5]       {$6$};
 
         \path (1) edge              node       {$\epsilon$} (2)
-                  edge [swap]       node       {$\epsilon$} (6)
+                  edge [swap]       node       {$\epsilon$} (5)
               (2) edge [loop above] node (top) {0}          (2)
                   edge              node       {1}          (3)
               (3) edge [loop above] node       {0}          (3)
                   edge              node       {1}          (4)
               (4) edge [loop above] node       {0}          (4)
-                  edge              node       {1}          (5)
+              (5) edge [loop below] node       {1}          (5)
+                  edge [bend left]  node       {0}          (6)
               (6) edge [loop below] node       {1}          (6)
-                  edge [bend left]  node       {0}          (7)
-              (7) edge [loop below] node       {1}          (7)
-                  edge [bend left]  node       {0}          (6);
+                  edge [bend left]  node       {0}          (5);
               
     \end{tikzpicture}
     
@@ -302,7 +300,7 @@ Please show your work on each problem. You might get partial credit for your wor
 \subsection*{Answers}
 
 \begin{enumerate}[(a)]
-    \item Let \(M'\) be the DFA with swapped accept/nonaccept states and let \(B'\) be the language recognized by \(M'\). Consider an arbitrary string \(w\). If \(w \in B\), then it must be true that \(w \notin B'\), since whichever accept state of \(M\) it ends on must be a nonaccept state of \(M'\). If \(w \notin B\), then it must have ended on a nonaccept state of \(M\), which would be an accept state of \(M'\). In this case \(w \in B'\). Therefore \(B'=\{w|w \notin B\}\). This is the definition of the complement of a set, so \(B'=B^{\complement}\). \(B\) is a regular language because it is recognized by a DFA, and since \(B^{\complement}\) is recognized by a DFA it is also a regular language. This means the complement of a regular language is also a regular language, therefore the class of regular languages is closed under complement.
+    \item Let \(M_{1}\) be the DFA with swapped accept/nonaccept states and let \(B_{1}\) be the language recognized by \(M_{1}\). Consider an arbitrary string \(w\). If \(w \in B\), then it must be true that \(w \notin B_{1}\), since whichever accept state of \(M\) it ends on must be a nonaccept state of \(M_{1}\). If \(w \notin B\), then it must have ended on a nonaccept state of \(M\), which would be an accept state of \(M_{1}\). In this case \(w \in B_{1}\). Therefore \(B_{1}=\{w|w \notin B\}\). This is the definition of the complement of a set, so \(B_{1}=B^{\complement}\). \(B\) is a regular language because it is recognized by a DFA, and since \(B^{\complement}\) is recognized by a DFA it is also a regular language. This means the complement of a regular language is also a regular language, therefore the class of regular languages is closed under complement.
 
     \item Consider the following NFA \(N_{1}\) with \(L(N_{1})=\{w| w \textrm{ contains an even number of 0s}\}\): 
     \begin{center}       
@@ -348,7 +346,7 @@ Please show your work on each problem. You might get partial credit for your wor
     \end{tikzpicture}
     \end{center}
     
-    Although this new NFA accepts strings with an odd number of 0s, it also accepts \(\epsilon\), and \(\epsilon \in L(N_{1})\), therefore \(L(N_{2}) \neq L(N_{1})^{\complement}\). This does not mean that the class of languages recognized by NFAs is not closed under complement. The class of languages recognized by NFAs is exactly the class of languages recognized by DFAs, and it was just shown that this class is closed under complement.
+    Although this new NFA accepts strings with an odd number of 0s, it also accepts \(\epsilon\), and \(\epsilon \in L(N_{1})\), therefore \(L(N_{2}) \neq L(N_{1})^{\complement}\). This does not mean that the class of languages recognized by NFAs is not closed under complement. The class of languages recognized by NFAs is exactly the class of languages recognized by DFAs, and it was just shown that this class is closed under complement, therefore it is also true that the class of languages recognized by NFAs is closed under complement.
 \end{enumerate}
 
 \newpage
